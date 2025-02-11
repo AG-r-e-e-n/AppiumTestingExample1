@@ -5,15 +5,21 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Prueba1</name>
   <dependencies>
-  <dependency>
+  	<dependency>
         <groupId>io.appium</groupId>
         <artifactId>java-client</artifactId>
-        <version>8.0.0</version>
+        <version>7.6.0</version>
     </dependency>
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>selenium-java</artifactId>
-        <version>4.0.0</version>
+        <version>3.141.59</version>
+    </dependency>
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>7.4.0</version>
+        <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>junit</groupId>
