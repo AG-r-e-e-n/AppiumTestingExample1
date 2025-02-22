@@ -20,7 +20,7 @@ public class Home{
     }
 
     public void clickButton() {
-    	menubutton = driver.findElementByAccessibilityId("open menu");
+    	menubutton = driver.findElementByAccessibilityId("View menu");
         menubutton.click();
     }
 }
