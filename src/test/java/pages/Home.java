@@ -9,7 +9,8 @@ import org.openqa.selenium.support.PageFactory;*/
 public class Home{
     private AndroidDriver<AndroidElement> driver;
 
-    private AndroidElement menubutton;
+    private AndroidElement menuButon;
+    private AndroidElement aboutButton;
     
     @AndroidFindBy(id = "com.example:id/username")
     private AndroidElement usernameField;
@@ -19,8 +20,13 @@ public class Home{
         //PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    public void clickButton() {
-    	menubutton = driver.findElementByAccessibilityId("View menu");
-        menubutton.click();
+    public void clickMenuButton() {
+    	menuButon = driver.findElementByAccessibilityId("View menu");
+        menuButon.click();
+    }
+
+    public void clickAboutButton() {
+        aboutButton = driver.findElementByXPath("//android.widget.TextView[@text='About']");
+        aboutButton.click();
     }
 }

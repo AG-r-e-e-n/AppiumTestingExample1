@@ -1,19 +1,20 @@
 package Pruebas;
 
-import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import pages.About;
 import pages.Home;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 
-public class test1 {
+public class TestVersion {
     private AndroidDriver<AndroidElement> driver;
 
     @Before
@@ -31,10 +32,22 @@ public class test1 {
     }
 
     @Test
-    public void testButtonClick() {
+    public void test_TC01() {
         Home mainPage = new Home(driver);
-        mainPage.clickButton();
-        // Agregar aserciones aquí
+        mainPage.clickMenuButton();
+        mainPage.clickAboutButton();
+        About ab = new About(driver);
+        if (ab.getTitle().equals("About")) {
+            if (ab.getVersion().equals("V.2.2.0-build 25")) {
+                System.out.println("Test Passed");
+            } else {
+                //Test failed
+                System.out.println("Test Failed");
+            }
+        } else {
+            //Test failed
+            System.out.println("Test Failed");
+        }
     }
 
     @After
