@@ -9,17 +9,20 @@ import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.About;
 import pages.Home;
+import pages.LogIn;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 
-public class TestVersion {
+import static org.junit.Assert.assertTrue;
+
+public class LogInTests {
     private AndroidDriver<AndroidElement> driver;
 
     @Before
     public void setUp() throws MalformedURLException {
-    	DesiredCapabilities caps = new DesiredCapabilities();
+        DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         caps.setCapability(MobileCapabilityType.DEVICE_NAME, "R9JR40PS32J");
         String appPath = Paths.get("src", "test", "resources", "My demo app", "mda-2.2.0-25.apk").toAbsolutePath().toString();
@@ -32,24 +35,32 @@ public class TestVersion {
     }
 
     @Test
-    public void test_TC01() {
+    public void test_TC02() {
         Home mainPage = new Home(driver);
         mainPage.clickMenuButton();
-        mainPage.clickAboutButton();
-        About ab = new About(driver);
-        System.out.println(ab.getTitle());
-        System.out.println(ab.getVersion());
-        if (ab.getTitle().equals("About")) {
-            if (ab.getVersion().equals("V.2.2.0-build 25")) {
-                System.out.println("Test Passed");
-            } else {
-                //Test failed
-                System.out.println("Test Failed");
-            }
-        } else {
-            //Test failed
-            System.out.println("Test Failed");
-        }
+        mainPage.clickLogInButton();
+        LogIn lgin = new LogIn(driver);
+        lgin.setUsername("bod@examples.com");
+        lgin.setPassword("10203040");
+        lgin.clickLogInButton();
+
+        // Verifica que el login fue exitoso
+        String logInValidate = "Products";
+        assertTrue("El login no fue exitoso", lgin.isLoggedIn(logInValidate));
+    }
+
+    @Test
+    public void test_TC03() {
+        Home mainPage = new Home(driver);
+        mainPage.clickMenuButton();
+        mainPage.clickLogInButton();
+        LogIn lgin = new LogIn(driver);
+        lgin.setUsername("alice@example.com (locked out)");
+        lgin.setPassword("10203040");
+        lgin.clickLogInButton();
+
+
+        assertTrue("Flujo alternativo correcto", lgin.isAblockUser());
     }
 
     @After
