@@ -1,18 +1,12 @@
-package Pruebas;
+package TestNotLonger;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.io.FileUtils;
-import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.OutputType;
+
 import java.net.URL;
 
 public class AppiumTest {

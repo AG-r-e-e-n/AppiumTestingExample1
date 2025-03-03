@@ -16,6 +16,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class LogInTests {
     private AndroidDriver<AndroidElement> driver;
@@ -24,7 +25,7 @@ public class LogInTests {
     public void setUp() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "R9JR40PS32J");
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "999806a6");
         String appPath = Paths.get("src", "test", "resources", "My demo app", "mda-2.2.0-25.apk").toAbsolutePath().toString();
         caps.setCapability(MobileCapabilityType.APP, appPath); // Change this to the path of your app
         //caps.setCapability(MobileCapabilityType.APP, "C:/Users/Abraham Green/Documents/AppiumEjemplo1/General-Store-AppiumTesting/src/General-Store.apk"); // Change this to the path of your app
@@ -61,6 +62,19 @@ public class LogInTests {
 
 
         assertTrue("Flujo alternativo correcto", lgin.isAblockUser());
+    }
+
+    @Test
+    public void test_TC04(){
+        Home mainPage = new Home(driver);
+        mainPage.clickMenuButton();
+        mainPage.clickLogInButton();
+
+        LogIn lgIn = new LogIn(driver);
+        lgIn.clickLogInButton();
+
+        fail("Se debe validar si no se hizo el inicio de sesión");
+
     }
 
     @After

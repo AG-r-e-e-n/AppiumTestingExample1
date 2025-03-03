@@ -14,6 +14,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.assertTrue;
+
 public class TestVersion {
     private AndroidDriver<AndroidElement> driver;
 
@@ -37,18 +39,16 @@ public class TestVersion {
         mainPage.clickMenuButton();
         mainPage.clickAboutButton();
         About ab = new About(driver);
-        System.out.println(ab.getTitle());
-        System.out.println(ab.getVersion());
         if (ab.getTitle().equals("About")) {
             if (ab.getVersion().equals("V.2.2.0-build 25")) {
                 System.out.println("Test Passed");
             } else {
                 //Test failed
-                System.out.println("Test Failed");
+                assertTrue("Esta no es la versión esperada", false);
             }
         } else {
             //Test failed
-            System.out.println("Test Failed");
+            assertTrue("The title is not 'About'", false);
         }
     }
 
