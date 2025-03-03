@@ -74,7 +74,6 @@ public class LogInTests {
         lgIn.clickLogInButton();
 
         fail("Se debe validar si no se hizo el inicio de sesión");
-
     }
 
     @After
