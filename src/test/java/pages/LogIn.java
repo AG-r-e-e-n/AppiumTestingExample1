@@ -26,6 +26,7 @@ public class LogIn {
 
     public boolean isLoggedIn(String element) {
         Home mainPage = new Home(driver);
+        System.out.println(mainPage.getTitleLabel());
         if (mainPage.getTitleLabel().equals(element)) {
             System.out.println("Test Passed");
             return true;

@@ -36,6 +36,8 @@ public class TestVersion {
     @Test
     public void test_TC01() {
         Home mainPage = new Home(driver);
+        //
+
         mainPage.clickMenuButton();
         mainPage.clickAboutButton();
         About ab = new About(driver);

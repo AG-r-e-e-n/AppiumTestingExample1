@@ -18,7 +18,7 @@ public class Home{
     }
 
     public String getTitleLabel() {
-        AndroidElement titleLabel = driver.findElementByAccessibilityId("title");
+        AndroidElement titleLabel = driver.findElementById("com.saucelabs.mydemoapp.android:id/productTV");
         return titleLabel.getText();
     }
 
