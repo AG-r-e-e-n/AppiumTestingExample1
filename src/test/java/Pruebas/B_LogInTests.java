@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.assertTrue;
 
@@ -28,6 +30,7 @@ public class B_LogInTests {
 
     @Before
     public void setUp() throws MalformedURLException, IOException {
+        Logger.getLogger("org.openqa.selenium.remote").setLevel(Level.WARNING);
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         caps.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator-5554");
