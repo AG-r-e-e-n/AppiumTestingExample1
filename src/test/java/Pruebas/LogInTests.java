@@ -5,7 +5,9 @@ import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.Home;
 import pages.LogIn;
@@ -18,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LogInTests {
     private AndroidDriver<AndroidElement> driver;
 
@@ -36,7 +39,7 @@ public class LogInTests {
     }
 
     @Test
-    public void test2_TC02() {
+    public void test_TC02() {
         Home mainPage = new Home(driver);
         mainPage.clickMenuButton();
         mainPage.clickLogInButton();
@@ -47,16 +50,18 @@ public class LogInTests {
 
         // Verifica que el login fue exitoso
         String logInValidate = "Products";
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         assertTrue("El login no fue exitoso", lgin.isLoggedIn(logInValidate));
     }
 
     @Test
-    public void test3_TC03() {
+    public void test_TC03() {
         Home mainPage = new Home(driver);
         mainPage.clickMenuButton();
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         mainPage.clickLogInButton();
         LogIn lgin = new LogIn(driver);
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         lgin.setUsername("alice@example.com (locked out)");
         lgin.setPassword("10203040");
         lgin.clickLogInButton();
@@ -66,14 +71,15 @@ public class LogInTests {
     }
 
     @Test
-    public void test4_TC04(){
+    public void test_TC04(){
         Home mainPage = new Home(driver);
         mainPage.clickMenuButton();
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         mainPage.clickLogInButton();
-
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         LogIn lgIn = new LogIn(driver);
         lgIn.clickLogInButton();
-        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         assertTrue("Flujo alternativo correcto", lgIn.areEmptyBoxes());
     }
 

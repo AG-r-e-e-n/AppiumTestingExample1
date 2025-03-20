@@ -18,9 +18,10 @@ import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-@FixMethodOrder(MethodSorters.JVM)
-public class TestVersion {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class A_TestVersion {
     private AndroidDriver<AndroidElement> driver;
 
     @Before
@@ -32,28 +33,29 @@ public class TestVersion {
         caps.setCapability(MobileCapabilityType.APP, appPath); // Change this to the path of your app
         //caps.setCapability(MobileCapabilityType.APP, "C:/Users/Abraham Green/Documents/AppiumEjemplo1/General-Store-AppiumTesting/src/General-Store.apk"); // Change this to the path of your app
         caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        //caps.setCapability("appWaitActivity", "com.saucelabs.mydemoapp.android.view.activities.MainActivity");
-        //caps.setCapability("appWaitDuration", 30000); // Aumenta el tiempo de espera a 30 segundos
+        caps.setCapability("appWaitActivity", "com.saucelabs.mydemoapp.android.view.activities.MainActivity");
+        caps.setCapability("appWaitDuration", 30000); // Aumenta el tiempo de espera a 30 segundos
         driver = new AndroidDriver<AndroidElement>(new URL("http://localhost:4723/"), caps);
     }
 
     @Test
-    public void test1_TC01() {
+    public void test_TC01() {
         Home mainPage = new Home(driver);
         mainPage.clickMenuButton();
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         mainPage.clickAboutButton();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         About ab = new About(driver);
         if (ab.getTitle().equals("About")) {
             if (ab.getVersion().equals("V.2.2.0-build 25")) {
                 assertTrue("Test Passed", true);
             } else {
                 //Test failed
-                System.out.println("Test Failed");
+                fail("Test Failed");
             }
         } else {
             //Test failed
-            System.out.println("Test Failed");
+            fail("Test Failed");
         }
     }
 
