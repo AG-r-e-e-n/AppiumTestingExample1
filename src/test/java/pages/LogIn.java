@@ -47,19 +47,29 @@ public class LogIn {
         }
     }
 
-    public boolean areEmptyBoxes() {
-        try{
-            AndroidElement emptyUser = driver.findElementById("com.saucelabs.mydemoapp.android:id/nameErrorTV");
-            //AndroidElement emptyPass = driver.findElementById("com.saucelabs.mydemoapp.android:id/passwordErrorTV");
-            if (emptyUser.getText().equals("Username is required")){ //|| emptyPass.getText().equals("Enter Password")){
-                return true;
-            } else{
-                return false;
+    public boolean areEmptyBoxes(String emptybox) {
+        try {
+//            //AndroidElement emptyUser = driver.findElementById("com.saucelabs.mydemoapp.android:id/nameErrorTV");
+//            //AndroidElement emptyPass = driver.findElementById("com.saucelabs.mydemoapp.android:id/passwordErrorTV");
+//            if (emptyUser.getText().equals("Username is required")){ //|| emptyPass.getText().equals("Enter Password")){
+//                return true;
+//            } else{
+//                return false;
+//            }
+
+            AndroidElement emptyTxtBox;
+            switch (emptybox) {
+                case "first":
+                    emptyTxtBox = driver.findElementById("com.saucelabs.mydemoapp.android:id/nameErrorTV");
+                    return emptyTxtBox.getText().equals("Username is required");
+                case "second":
+                    emptyTxtBox = driver.findElementById("com.saucelabs.mydemoapp.android:id/passwordErrorTV");
+                    return emptyTxtBox.getText().equals("Enter Password");
             }
         }
         catch (NoSuchElementException e) {
             throw new RuntimeException(e);
-
         }
+        return false;
     }
 }
