@@ -1,6 +1,10 @@
 package pages;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public class LogIn {
     private final AndroidDriver<AndroidElement> driver;
@@ -28,11 +32,8 @@ public class LogIn {
         Home mainPage = new Home(driver);
         System.out.println(mainPage.getTitleLabel());
         if (mainPage.getTitleLabel().equals(element)) {
-            System.out.println("Test Passed");
             return true;
         } else {
-            //Test failed
-            System.out.println("Test Failed");
             return false;
         }
     }
@@ -40,12 +41,25 @@ public class LogIn {
     public boolean isAblockUser(){
         AndroidElement error = driver.findElementById("com.saucelabs.mydemoapp.android:id/passwordErrorTV");
         if (error.getText().equals("Sorry this user has been locked out.")) {
-            System.out.println("Test Passed");
             return true;
         } else {
-            //Test failed
-            System.out.println("Test Failed");
             return false;
+        }
+    }
+
+    public boolean areEmptyBoxes() {
+        try{
+            AndroidElement emptyUser = driver.findElementById("com.saucelabs.mydemoapp.android:id/nameErrorTV");
+            //AndroidElement emptyPass = driver.findElementById("com.saucelabs.mydemoapp.android:id/passwordErrorTV");
+            if (emptyUser.getText().equals("Username is required")){ //|| emptyPass.getText().equals("Enter Password")){
+                return true;
+            } else{
+                return false;
+            }
+        }
+        catch (NoSuchElementException e) {
+            throw new RuntimeException(e);
+
         }
     }
 }
